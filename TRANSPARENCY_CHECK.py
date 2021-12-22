@@ -1,4 +1,4 @@
-import os, sys, cv2, io, re
+import os, sys, cv2, io, re, shutil
 import numpy as np
 import matplotlib.pyplot as plt
 from google.cloud import vision
@@ -16,7 +16,15 @@ def transparency_check(MASTERPATH, SLAVEPATH):
         IMG       = cv2.imread(IMGPATH, cv2.IMREAD_COLOR)
         boxthresh = 8
         ssthresh  = 0.95
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/sivaramakrishnand/Desktop/TESTS/GOOGLE VISION TEST/cred.json"
+        CWD       = os.getcwd()
+        CRED      = CWD + "/cred.json"
+
+        try:
+            CREDFILE = sys._MEIPASS + "/cred.json"
+            shutil.copy(CREDFILE, CRED)
+        except:pass
+
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = CRED
 
         with io.open(IMGPATH, 'rb') as imagefile:
             imagedata = imagefile.read()
@@ -113,6 +121,7 @@ class App(QWidget):
         sys.exit()
 
 if __name__ == '__main__':
+    app = None
     app = QApplication([])
     ex = App()
     sys.exit(app.exec_())
