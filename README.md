@@ -5,3 +5,5 @@ All other files except the below mentioned files are redundant.
 1) BORDER_CHECK
 2) TRANSPARENCY_CHECK
 3) APPEND_MASTER_SLAVE
+
+While converting TRANSPARENCY_CHECK script using pyinstaller, we need to create a hook file called hook-grpc.py and place it inside pyinstaller hooks folder. The hooks file is also attached here.
